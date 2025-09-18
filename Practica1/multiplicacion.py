@@ -5,12 +5,8 @@ B = input("Entero B:")
 DigitosA = []
 DigitosB = []
 
-filasA = len(A)
-filasB = len(B)
-
 for digito in A:
     DigitosA.append(int(digito))
-
 
 for digito in B:
     DigitosB.append(int(digito))
