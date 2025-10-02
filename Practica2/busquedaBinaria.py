@@ -49,6 +49,8 @@ else:
 current, peak = tracemalloc.get_traced_memory()
 print(f"Memoria actual: {current / 1024} KB; Pico: {peak / 1024} KB")
 tracemalloc.stop()
+total =  (peak /1024) - (current / 1024) 
+print(f"total: {total} ")
 end = time.time()
 print(f"Tiempo de ejecución: {end - start} segundos")
 
