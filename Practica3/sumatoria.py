@@ -6,13 +6,13 @@ def sumatoriaRecursiva(numero):
     if numero == 0:
         return 0
     else:
-        return numero + sumatoriaRecursiva(numero-1)
+        return numero % 10 + sumatoriaRecursiva(numero // 10)
     
 def sumatoriaIterativa(numero):
     sumatoria = 0
     while numero > 0:
-        sumatoria += numero
-        numero += -1
+        sumatoria += numero % 10
+        numero //= 10
     return sumatoria
 
 numero = int(input("Ingrese el numero del que desea obtener la sumatoria: "))
