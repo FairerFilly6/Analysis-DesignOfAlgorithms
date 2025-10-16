@@ -34,5 +34,21 @@ if __name__ == "__main__":
 
     print(f"Cadena invertida recursivamente: {invertidaRecursiva}")
 
+    
+tracemalloc.start()
+start = time.time()
+
+print("Solucion recursiva:")
+invertidaRecursiva = invertirCadenaRecursiva(texto)
+print(f"Cadena invertida recursivamente: {invertidaRecursiva}")
+
+end = time.time()
+current, peak = tracemalloc.get_traced_memory()
+tracemalloc.stop()
+print(f" Memoria actual: {current / 1024} KB; Pico: {peak / 1024} KB")
+memoriaRecursiva = (peak / 1024) - (current / 1024)
+print(f"Consumo de memoria: {memoriaRecursiva} ")
+print(f" Tiempo de ejecución: {end - start} segundos\n")
+
 
 
