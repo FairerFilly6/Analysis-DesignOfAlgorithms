@@ -11,8 +11,8 @@ mochila = int(input("Ingresa la capacidad de la mochila: "))
 num_objetos = int(input("Ingresa el número de objetos: "))
 
 for i in range(num_objetos):
-    peso = r.randint(1, 100)      # peso aleatorio entre 1 y 100
-    precio = r.randint(10, 500)   # precio aleatorio entre 10 y 500
+    peso = r.randint(1, 100)      
+    precio = r.randint(10, 500)   
     objetos.append((peso, precio))
 
 
@@ -32,7 +32,7 @@ for peso, precio, valorpeso in pesoPrecio:
         fraccion = mochila / peso
         ganancia += precio * fraccion
         objetosMochila.append((mochila, precio * fraccion))
-        mochila = 0  # ya no cabe nada más
+        mochila = 0 
 
 
 
