@@ -8,22 +8,32 @@ objetosMochila = []
 
 #numeroObjetos = int(input("Ingresa el numero de objetos"))
 mochila = int(input("Ingresa la capacidad de la mochila: "))
-for peso, precio, in zip(pesos, precios):
-    objetos.append((peso,precio))
+num_objetos = int(input("Ingresa el número de objetos: "))
+
+for i in range(num_objetos):
+    peso = r.randint(1, 100)      
+    precio = r.randint(10, 500)   
+    objetos.append((peso, precio))
+
+
 
 pesoPrecio = [(peso, precio, precio / peso) for peso, precio in objetos]
 
 pesoPrecio.sort(key= lambda x: x[2], reverse=True)
-i = 0
-while(pesoPrecio[i][0] <= mochila):
-    ganancia += pesoPrecio[i][1]
-    mochila -= pesoPrecio[i][0]
-    objetosMochila.append(( pesoPrecio[i][0] ,  pesoPrecio[i][1]))
-    i+=1
-    if(pesoPrecio[i][0] > mochila):
-        espacioDisp = mochila / pesoPrecio[i][0] 
-        mochila += pesoPrecio[i][1] * espacioDisp
-        mochila -= espacioDisp * pesoPrecio[i][0]
+
+for peso, precio, valorpeso in pesoPrecio:
+    if mochila == 0:
+        break
+    if peso <= mochila:
+        ganancia += precio
+        mochila -= peso
+        objetosMochila.append((peso, precio))
+    else:
+        fraccion = mochila / peso
+        ganancia += precio * fraccion
+        objetosMochila.append((mochila, precio * fraccion))
+        mochila = 0 
+
 
 
 
