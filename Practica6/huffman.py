@@ -1,11 +1,9 @@
 
 import heapq
 
-text = """Omar
-Andrés
-Barrón
-Rivera
-"""
+with open("texto.txt", "r", encoding="utf8") as f:
+    text = f.read()
+
 size = len(text)
 
 print(text)
@@ -101,8 +99,61 @@ def mostrarArbol(nodo, nivel=0):
 
 
 mostrarArbol(arbol)
+
+def generarCodigos(nodo, codigoActual="", tabla=None):
+    if tabla is None:
+        tabla = {}
+
     
+    if nodo['caracter'] is not None:
+        tabla[nodo['caracter']] = codigoActual
+        return tabla
+    
+    if nodo['izq'] is not None:
+        generarCodigos(nodo['izq'], codigoActual + "0", tabla)
+
+    if nodo['der'] is not None:
+        generarCodigos(nodo['der'], codigoActual + "1", tabla)
+
+    return tabla
+
+
+codigos = generarCodigos(arbol)
+print(codigos)
+
+for c, cod in codigos.items():
+    print(f"{repr(c)} : {cod}")
+
+comprimido = ""
+
+for caracter in text:
+    clave = codigos[caracter]
+    comprimido += clave
+
+print("Texto comprimido:")
+print(comprimido)
+
+with open("respaldo.txt", "w", encoding="utf8") as f:
+    f.write(comprimido)
 
 
 
+def decodificar(cadena, arbol):
+    nodo = arbol
+    resultado = ""
 
+    for bit in cadena:
+        if bit == "0":
+            nodo = nodo["izq"]
+        else:
+            nodo = nodo["der"]
+
+        if nodo["caracter"] is not None:
+            resultado += nodo["caracter"]
+            nodo = arbol  # regresamos a la raíz
+
+    return resultado
+
+# res = decodificar(comprimido, arbol)
+# print("Decodificado")
+# print(res)
