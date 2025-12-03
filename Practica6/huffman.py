@@ -133,27 +133,27 @@ for caracter in text:
 print("Texto comprimido:")
 print(comprimido)
 
-with open("respaldo.txt", "w", encoding="utf8") as f:
-    f.write(comprimido)
+def crearComprimido(comprimido: str, nombre_archivo: str):
+    with open(nombre_archivo, "wb") as f:
+        byte = 0
+        bits_acumulados = 0
 
+        for bit in comprimido:
+            byte = (byte << 1) | int(bit)
+            bits_acumulados += 1
 
+            
+            if bits_acumulados == 8:
+                f.write(bytes([byte]))
+                byte = 0
+                bits_acumulados = 0
 
-def decodificar(cadena, arbol):
-    nodo = arbol
-    resultado = ""
+        
+        if bits_acumulados > 0:
+            byte = byte << (8 - bits_acumulados)
+            f.write(bytes([byte]))
 
-    for bit in cadena:
-        if bit == "0":
-            nodo = nodo["izq"]
-        else:
-            nodo = nodo["der"]
+    print(f"Archivo comprimido guardado como {nombre_archivo}")
 
-        if nodo["caracter"] is not None:
-            resultado += nodo["caracter"]
-            nodo = arbol  # regresamos a la raíz
+crearComprimido(comprimido, "respaldo.bin")
 
-    return resultado
-
-# res = decodificar(comprimido, arbol)
-# print("Decodificado")
-# print(res)
