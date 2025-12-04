@@ -73,6 +73,7 @@ while(len(heap) > 1):
     }
     
     heapq.heappush(heap,(freqTotal, contador, nuevo))
+    print(heap)
     contador+=1
 
 
